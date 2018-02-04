@@ -20,10 +20,11 @@ DEVICE=STM8S103
 CC_ROOT =
 CC      = sdcc
 CFLAGS  = -mstm8 -lstm8 --opt-code-size
+AR      = sdcclib
 
 # set output folder and target name
 OUTPUT_DIR = ./$(DEVICE)
-TARGET     = $(OUTPUT_DIR)/$(DEVICE).hex
+TARGET     = $(OUTPUT_DIR)/spl.lib
 
 # set project folder and files (all *.c)
 PRJ_ROOT    = ..
@@ -33,11 +34,14 @@ PRJ_SOURCE  = $(notdir $(wildcard $(PRJ_SRC_DIR)/*.c))
 PRJ_OBJECTS := $(addprefix $(OUTPUT_DIR)/, $(PRJ_SOURCE:.c=.rel))
 
 # set SPL paths
-SPL_ROOT    = ../../..
-SPL_MAKE_DIR = $(SPL_ROOT)/Libraries/STM8S_StdPeriph_Driver
+SPL_ROOT    = ../..
+SPL_SRC_DIR = $(SPL_ROOT)/Libraries/STM8S_StdPeriph_Driver/src
 SPL_INC_DIR = $(SPL_ROOT)/Libraries/STM8S_StdPeriph_Driver/inc
-SPL_LIB_DIR = $(SPL_ROOT)/Libraries/STM8S_StdPeriph_Driver/$(DEVICE)
-SPL_LIB = spl.lib
+SPL_CONF_DIR = $(SPL_ROOT)/Libraries/STM8S_StdPeriph_Driver/conf
+# define SPL_SOURCE_PREFIX in the target dependent .mk file
+include $(SPL_ROOT)/Libraries/STM8S_StdPeriph_Driver/mk/$(DEVICE).mk
+SPL_SOURCE = $(foreach prefix, $(SPL_SOURCE_PREFIX), $(notdir $(wildcard $(SPL_SRC_DIR)/$(prefix)*.c)))
+SPL_OBJECTS := $(addprefix $(OUTPUT_DIR)/, $(SPL_SOURCE:.c=.rel))
 
 # set path to STM8S_EVAL board routines
 EVAL_DIR     = $(SPL_ROOT)/Utilities/STM8S_EVAL
@@ -56,17 +60,14 @@ EVAL_STM8S_128K_OBJECTS := $(addprefix $(OUTPUT_DIR)/, $(EVAL_STM8S_128K_SOURCE:
 
 
 # collect all include folders
-INCLUDE = -I$(PRJ_SRC_DIR) -I$(SPL_INC_DIR) -I$(EVAL_DIR) -I$(EVAL_COMM_DIR) -I$(EVAL_STM8S_128K_DIR)
+INCLUDE = -I$(PRJ_SRC_DIR) -I$(SPL_INC_DIR) -I$(SPL_CONF_DIR) -I$(EVAL_DIR) -I$(EVAL_COMM_DIR) -I$(EVAL_STM8S_128K_DIR)
 
 # collect all source directories
 VPATH=$(PRJ_SRC_DIR):$(SPL_SRC_DIR):$(EVAL_DIR):$(EVAL_COMM_DIR):$(EVAL_STM8S_128K_DIR)
 
 .PHONY: clean
 
-all: $(OUTPUT_DIR) $(TARGET) $(SPL_LIB)
-
-$(SPL_LIB):
-	$(MAKE) -C $(SPL_MAKE_DIR)
+all: $(OUTPUT_DIR) $(TARGET)
 
 $(OUTPUT_DIR):
 	mkdir -p $(OUTPUT_DIR)
@@ -77,9 +78,9 @@ $(OUTPUT_DIR)/%.rel: %.c
 $(OUTPUT_DIR)/%.rel: %.c
 	$(CC) $(CFLAGS) $(INCLUDE) -D$(DEVICE) -c $? -o $@
 
-$(TARGET): $(PRJ_OBJECTS) $(SPL_LIB) $(EVAL_OBJECTS) $(EVAL_COMM_OBJECTS) $(EVAL_STM8S_128K_OBJECTS)
-	$(CC) $(CFLAGS) -o $(TARGET) -L$(SPL_LIB_DIR) -l$(SPL_LIB) $^
+$(TARGET): $(PRJ_OBJECTS) $(SPL_OBJECTS) $(EVAL_OBJECTS) $(EVAL_COMM_OBJECTS) $(EVAL_STM8S_128K_OBJECTS)
+	$(AR) -a $(TARGET) $^
 
 clean: 
 	rm -fr $(OUTPUT_DIR)
-	$(MAKE) -C $(SPL_MAKE_DIR) clean
+

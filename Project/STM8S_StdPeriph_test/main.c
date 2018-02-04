@@ -46,7 +46,7 @@
  #else
   #define PUTCHAR_PROTOTYPE void putchar (char c)
  #endif 
- #define GETCHAR_PROTOTYPE char getchar (void)
+ #define GETCHAR_PROTOTYPE int getchar (void)
 #else /* _IAR_ */
 #define PUTCHAR_PROTOTYPE int putchar (int c)
 #define GETCHAR_PROTOTYPE int getchar (void)
@@ -65,7 +65,7 @@ void main(void)
 {
   uint8_t  val  = 0x00;
   //uint32_t addr = 0x40A5;   // address for flash read/write
-  uint32_t i;
+  //uint32_t i;
 
   /* init High speed internal clock prescaler: 1 */
   CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
@@ -74,8 +74,8 @@ void main(void)
   CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, ENABLE);
 
   /* Initialize LED pins in Output Mode */
-  GPIO_Init(GPIOH, (GPIO_Pin_TypeDef)(GPIO_PIN_2 | GPIO_PIN_3), GPIO_MODE_OUT_PP_LOW_FAST);
-  GPIO_WriteHigh(GPIOH, (GPIO_Pin_TypeDef)(GPIO_PIN_2 | GPIO_PIN_3));
+  GPIO_Init(GPIOA, (GPIO_Pin_TypeDef)(GPIO_PIN_2 | GPIO_PIN_3), GPIO_MODE_OUT_PP_LOW_FAST);
+  GPIO_WriteHigh(GPIOA, (GPIO_Pin_TypeDef)(GPIO_PIN_2 | GPIO_PIN_3));
 
   // config 1ms clock
   TIM4_DeInit();
@@ -118,7 +118,7 @@ void main(void)
       if ((g_count1ms % 500) == 0)
       {
         // toogle LED
-        GPIO_WriteReverse(GPIOH, (GPIO_Pin_TypeDef)GPIO_PIN_2);
+        GPIO_WriteReverse(GPIOA, (GPIO_Pin_TypeDef)GPIO_PIN_2);
         
         // print time
         printf("time %ld%c%c", g_count1ms,10,13);
