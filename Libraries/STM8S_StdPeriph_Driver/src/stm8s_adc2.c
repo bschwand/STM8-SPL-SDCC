@@ -386,13 +386,3 @@ void ADC2_ClearITPendingBit(void)
   ADC2->CSR &= (uint8_t)(~ADC2_CSR_EOC);
 }
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

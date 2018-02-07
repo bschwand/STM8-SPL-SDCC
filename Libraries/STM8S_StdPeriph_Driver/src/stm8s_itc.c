@@ -334,13 +334,3 @@ void ITC_SetSoftwarePriority(ITC_Irq_TypeDef IrqNum, ITC_PriorityLevel_TypeDef P
   }
 }
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

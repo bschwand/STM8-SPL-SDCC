@@ -503,13 +503,3 @@ void TIM6_SelectSlaveMode(TIM6_SlaveMode_TypeDef TIM6_SlaveMode)
   TIM6->SMCR = tmpsmcr;
 }
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

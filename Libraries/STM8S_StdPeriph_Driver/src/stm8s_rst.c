@@ -74,13 +74,3 @@ void RST_ClearFlag(RST_Flag_TypeDef RST_Flag)
   RST->SR = (uint8_t)RST_Flag;
 }
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

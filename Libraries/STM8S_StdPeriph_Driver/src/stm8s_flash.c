@@ -814,13 +814,3 @@ IN_RAM(void FLASH_ProgramBlock(uint16_t BlockNum, FLASH_MemType_TypeDef FLASH_Me
 #endif /* _COSMIC_ && RAM_EXECUTION */
 
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

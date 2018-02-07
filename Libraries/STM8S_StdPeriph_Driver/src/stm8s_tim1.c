@@ -2317,13 +2317,3 @@ static void TI4_Config(uint8_t TIM1_ICPolarity,
 }
 
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

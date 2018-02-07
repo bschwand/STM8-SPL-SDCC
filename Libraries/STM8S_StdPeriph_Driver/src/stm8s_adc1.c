@@ -685,13 +685,3 @@ void ADC1_ClearITPendingBit(ADC1_IT_TypeDef ITPendingBit)
   }
 }
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

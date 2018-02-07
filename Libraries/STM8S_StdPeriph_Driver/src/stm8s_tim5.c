@@ -1405,13 +1405,3 @@ void TIM5_EncoderInterfaceConfig(TIM5_EncoderMode_TypeDef TIM5_EncoderMode,
   TIM5->CCMR2 = tmpccmr2;
 }
 
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

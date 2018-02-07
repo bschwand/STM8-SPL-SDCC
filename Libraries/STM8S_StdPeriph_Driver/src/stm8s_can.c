@@ -1441,5 +1441,3 @@ static ITStatus CheckITStatus(uint8_t CAN_Reg, uint8_t It_Bit)
   return (ITStatus)pendingbitstatus;
 }
 
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

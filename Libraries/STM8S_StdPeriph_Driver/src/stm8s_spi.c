@@ -423,13 +423,3 @@ void SPI_ClearITPendingBit(SPI_IT_TypeDef SPI_IT)
   
 }
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

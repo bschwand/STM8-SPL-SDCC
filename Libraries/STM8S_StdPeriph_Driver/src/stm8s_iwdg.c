@@ -101,13 +101,3 @@ void IWDG_Enable(void)
   IWDG->KR = IWDG_KEY_ENABLE;
 }
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

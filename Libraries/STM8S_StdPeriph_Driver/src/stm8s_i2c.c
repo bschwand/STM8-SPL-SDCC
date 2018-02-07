@@ -881,13 +881,3 @@ void I2C_ClearITPendingBit(I2C_ITPendingBit_TypeDef I2C_ITPendingBit)
   /* Clear the selected I2C flag */
   I2C->SR2 = (uint8_t)((uint16_t)~flagpos);
 }
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

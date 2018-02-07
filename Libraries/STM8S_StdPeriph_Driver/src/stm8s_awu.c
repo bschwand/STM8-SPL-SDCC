@@ -186,13 +186,3 @@ FlagStatus AWU_GetFlagStatus(void)
 }
 
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

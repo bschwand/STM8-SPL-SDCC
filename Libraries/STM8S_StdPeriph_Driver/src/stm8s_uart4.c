@@ -890,13 +890,3 @@ void UART4_ClearITPendingBit(UART4_IT_TypeDef UART4_IT)
   }
 }
 
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

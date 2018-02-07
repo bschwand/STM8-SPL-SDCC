@@ -870,13 +870,3 @@ void UART2_ClearITPendingBit(UART2_IT_TypeDef UART2_IT)
   }
 }
 
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

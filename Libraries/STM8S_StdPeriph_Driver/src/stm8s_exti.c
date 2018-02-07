@@ -169,13 +169,3 @@ EXTI_TLISensitivity_TypeDef EXTI_GetTLISensitivity(void)
   return((EXTI_TLISensitivity_TypeDef)value);
 }
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

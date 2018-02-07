@@ -1032,13 +1032,3 @@ static void TI2_Config(uint8_t TIM3_ICPolarity,
   TIM3->CCER1 |= TIM3_CCER1_CC2E;
 }
 
-/**
-  * @}
-  */
-  
-  /**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -397,13 +397,3 @@ void TIM4_ClearITPendingBit(TIM4_IT_TypeDef TIM4_IT)
   TIM4->SR1 = (uint8_t)(~TIM4_IT);
 }
 
-/**
-  * @}
-  */
-  
-  /**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

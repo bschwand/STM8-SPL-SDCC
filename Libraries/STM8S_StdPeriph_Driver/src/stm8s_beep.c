@@ -141,13 +141,3 @@ void BEEP_LSICalibrationConfig(uint32_t LSIFreqHz)
   }
 }
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

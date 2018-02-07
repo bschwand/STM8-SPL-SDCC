@@ -725,13 +725,3 @@ void UART3_ClearITPendingBit(UART3_IT_TypeDef UART3_IT)
   }
 }
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

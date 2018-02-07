@@ -788,13 +788,3 @@ void UART1_ClearITPendingBit(UART1_IT_TypeDef UART1_IT)
   }
 }
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -744,13 +744,3 @@ void CLK_ClearITPendingBit(CLK_IT_TypeDef CLK_IT)
   
 }
 
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
