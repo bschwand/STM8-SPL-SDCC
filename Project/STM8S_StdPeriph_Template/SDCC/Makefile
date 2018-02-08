@@ -14,7 +14,7 @@
 #######
 
 # STM8 device (for supported devices see stm8s.h)
-DEVICE=STM8S105
+DEVICE=STM8S103
 
 # set compiler path & parameters 
 CC_ROOT =
@@ -34,10 +34,10 @@ PRJ_OBJECTS := $(addprefix $(OUTPUT_DIR)/, $(PRJ_SOURCE:.c=.rel))
 
 # set SPL paths
 SPL_ROOT    = ../../..
-SPL_SRC_DIR = $(SPL_ROOT)/Libraries/STM8S_StdPeriph_Driver/src
+SPL_MAKE_DIR = $(SPL_ROOT)/Libraries/STM8S_StdPeriph_Driver
 SPL_INC_DIR = $(SPL_ROOT)/Libraries/STM8S_StdPeriph_Driver/inc
-SPL_SOURCE  = stm8s_gpio.c
-SPL_OBJECTS := $(addprefix $(OUTPUT_DIR)/, $(SPL_SOURCE:.c=.rel))
+SPL_LIB_DIR = $(SPL_ROOT)/Libraries/STM8S_StdPeriph_Driver/$(DEVICE)
+SPL_LIB = spl.lib
 
 # set path to STM8S_EVAL board routines
 EVAL_DIR     = $(SPL_ROOT)/Utilities/STM8S_EVAL
@@ -63,7 +63,10 @@ VPATH=$(PRJ_SRC_DIR):$(SPL_SRC_DIR):$(EVAL_DIR):$(EVAL_COMM_DIR):$(EVAL_STM8S_12
 
 .PHONY: clean
 
-all: $(OUTPUT_DIR) $(TARGET)
+all: $(OUTPUT_DIR) $(TARGET) $(SPL_LIB)
+
+$(SPL_LIB):
+	$(MAKE) -C $(SPL_MAKE_DIR)
 
 $(OUTPUT_DIR):
 	mkdir -p $(OUTPUT_DIR)
@@ -74,9 +77,9 @@ $(OUTPUT_DIR)/%.rel: %.c
 $(OUTPUT_DIR)/%.rel: %.c
 	$(CC) $(CFLAGS) $(INCLUDE) -D$(DEVICE) -c $? -o $@
 
-$(TARGET): $(PRJ_OBJECTS) $(SPL_OBJECTS) $(EVAL_OBJECTS) $(EVAL_COMM_OBJECTS) $(EVAL_STM8S_128K_OBJECTS)
-	$(CC) $(CFLAGS) -o $(TARGET) $^
+$(TARGET): $(PRJ_OBJECTS) $(SPL_LIB) $(EVAL_OBJECTS) $(EVAL_COMM_OBJECTS) $(EVAL_STM8S_128K_OBJECTS)
+	$(CC) $(CFLAGS) -o $(TARGET) -L$(SPL_LIB_DIR) -l$(SPL_LIB) $^
 
 clean: 
 	rm -fr $(OUTPUT_DIR)
-
+	$(MAKE) -C $(SPL_MAKE_DIR) clean
