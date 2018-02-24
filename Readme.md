@@ -1,3 +1,19 @@
+STM8 SPL, patched for use with SDCC
+=================
+
+This version of the STM8 Standard Peripheral library has the following changes:
+- patched with [STM8-SPL_SDCC_patch](https://github.com/gicking/STM8-SPL_SDCC_patch)
+- all C files were split into one function per file, so as to allow SDCC linker to do dead code elimination
+- a makefile for an spl library was introduced
+- the makefile for STM8S_StdPeriph_Template and STM8S_StdPeriph_test illustrate how to create a simple application with the SPL and SDCC
+
+NB: the examples in STM8S_StdPeriph_Examples have NOT been updated, this is a work in progress.
+
+LICENSE
+=================
+
+The original licenses remain, these sources are useable under the terms of [SLA044](http://www.st.com/SLA044).
+
 Toolchain Installation for SDCC
 =================
 
