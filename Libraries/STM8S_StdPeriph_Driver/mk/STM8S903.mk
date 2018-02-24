@@ -12,8 +12,8 @@ SPL_SOURCE_PREFIX = stm8s_adc1 \
                     stm8s_rst \
                     stm8s_spi \
                     stm8s_tim1 \
-                    stm8s_tim2 \
-                    stm8s_tim4 \
+                    stm8s_tim5 \
+                    stm8s_tim6 \
                     stm8s_uart1 \
                     stm8s_wwdg
 
