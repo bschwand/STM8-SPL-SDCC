@@ -8,13 +8,13 @@ clear
 
 # target device (for supported devices see stm8s.h)
 #DEVICE=STM8AF52Ax
-DEVICE=STM8S105
+DEVICE=STM8S103
 
 # set make tool (if not in PATH, set complete path)
 MAKE=make
 
 # set serial upload tool and serial port (stm8gal from https://github.com/gicking/stm8gal)
-BSL_LOADER=~/Öffentlich/GitHub/stm8gal/stm8gal/stm8gal
+BSL_LOADER=~/Öffentlich/GitHub/stm8gal/stm8gal
 BSL_PORT=/dev/ttyUSB0
 
 # set SWIM upload tool and device name (stm8flash from https://github.com/vdudouyt/stm8flash)
