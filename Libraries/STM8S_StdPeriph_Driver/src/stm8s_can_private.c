@@ -48,7 +48,7 @@ __IO uint8_t _FMI = 0;
   * @param   It_Bit: specifies the interrupt source bit to check.
   * @retval The new state of the CAN Interrupt, which can be one of ITStatus.
   */
-static ITStatus CheckITStatus(uint8_t CAN_Reg, uint8_t It_Bit)
+ITStatus CheckITStatus(uint8_t CAN_Reg, uint8_t It_Bit)
 {
   ITStatus pendingbitstatus = RESET;
   if ((CAN_Reg & It_Bit) != (uint8_t)RESET)

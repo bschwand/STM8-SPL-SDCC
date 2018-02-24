@@ -39,12 +39,12 @@
 #define CAN_ACKNOWLEDGE_TIMEOUT ((uint16_t)0xFFFF)
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern __IO uint32_t _Id = 0;
-extern __IO uint8_t _IDE = 0;
-extern __IO uint8_t _RTR = 0;
-extern __IO uint8_t _DLC = 0;
-extern __IO uint8_t _Data[8] = {0};
-extern __IO uint8_t _FMI = 0;
+extern __IO uint32_t _Id;
+extern __IO uint8_t _IDE;
+extern __IO uint8_t _RTR;
+extern __IO uint8_t _DLC;
+extern __IO uint8_t _Data[];
+extern __IO uint8_t _FMI;
 /* Private function prototypes -----------------------------------------------*/
 ITStatus CheckITStatus(uint8_t CAN_Reg, uint8_t It_Bit);
 
