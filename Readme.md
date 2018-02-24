@@ -12,7 +12,7 @@ NB: the examples in STM8S_StdPeriph_Examples have NOT been updated, this is a wo
 LICENSE
 =================
 
-The original licenses remain, these sources are useable under the terms of [SLA044](http://www.st.com/SLA044).
+The original licenses remain, these sources are useable under the terms of [SLA044](http://www.st.com/SLA0044).
 
 Toolchain Installation for SDCC
 =================
