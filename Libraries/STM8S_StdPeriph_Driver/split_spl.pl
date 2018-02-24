@@ -1,4 +1,17 @@
 #!/usr/bin/perl
+# Author: B.Schwander, Feb. 2018
+#
+# Helper script to split SPL c files into one file per function.
+# This script will break if the format is not exactly the format followed in the
+# original STM8S SPL, as we match the doxygen tag and positions and expect them
+# to be exactly within the same place, spaces, etc.
+# header and footer are copies of the original headers and footer
+#
+# just using this file is not enough !
+# - the generated files can have some issues, like multiple functions
+# - the types and variable definitions private to each C file should be moved to
+#   a stm8X_XXX_private.h , resp. stm8_X_XXX_private.c
+# - every file shall be reviewed and checked that no function is missing
 {
     my $footer = <<'FOOTER';
 /**
