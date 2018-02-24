@@ -7,7 +7,8 @@ This version of the STM8S Standard Peripheral library has the following changes:
 - all C files were split into one function per file, so as to allow SDCC linker to do dead code elimination
 - a makefile for an spl library was introduced
 - the makefile for STM8S_StdPeriph_Template and STM8S_StdPeriph_test illustrate how to create a simple application with the SPL and SDCC
-- just type make in Project/STM8S_StdPeriph_test/SDCC to build the example and spl.liberty
+- just type make in Project/STM8S_StdPeriph_test/SDCC to build the example and spl.lib
+
 NB: the examples in STM8S_StdPeriph_Examples have NOT been updated, this is a work in progress.
 
 LICENSE
