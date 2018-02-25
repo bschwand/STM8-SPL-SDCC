@@ -14,7 +14,9 @@
 #######
 
 # STM8 device (for supported devices see stm8s.h)
-DEVICE=STM8S103
+ifeq ($(origin DEVICE), undefined)
+    $(error "DEVICE not defined ! define it in your application makefile")
+endif
 
 # set compiler path & parameters 
 CC_ROOT =
