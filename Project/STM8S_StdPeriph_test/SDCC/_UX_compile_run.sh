@@ -7,8 +7,8 @@ cd `dirname $0`
 clear
 
 # target device (for supported devices see stm8s.h)
-#DEVICE=STM8AF52Ax
-DEVICE=STM8S103
+DEVICE=STM8AF52Ax
+#DEVICE=STM8S105
 
 # set make tool (if not in PATH, set complete path)
 MAKE=make

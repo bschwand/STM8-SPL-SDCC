@@ -1,0 +1,11 @@
+/Libraries/STM8S_StdPeriph_Driver/STM8AF52Ax/*
+*.asm
+*.lst
+*.rel
+*.rst
+*.sym
+*.cdb
+*.hex
+*.lk
+*.map
+
