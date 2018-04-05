@@ -27,6 +27,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s.h"
+#include "stm8s_it.h"    /* SDCC patch: required by SDCC for interrupts */
 
 /**
   * @addtogroup TIM5_Synchronisation_with_TIM6

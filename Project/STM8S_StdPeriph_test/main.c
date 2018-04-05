@@ -28,6 +28,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s.h"
+#include "stm8s_it.h"    /* SDCC patch: required by SDCC for interrupts */
 #include "stdio.h"
 #include "stm8s_it.h"    // SDCC requires ISR declaration to be included here
 
