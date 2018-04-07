@@ -14,7 +14,8 @@
 #######
 
 # STM8 device (for supported devices see stm8s.h)
-DEVICE=STM8S208
+DEVICE=STM8S103
+#DEVICE=STM8S208
 
 # set compiler path & parameters 
 CC_ROOT =
