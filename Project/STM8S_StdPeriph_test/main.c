@@ -28,6 +28,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s.h"
+#include "stm8s_it.h"    /* SDCC patch: required by SDCC for interrupts */
 #include "stdio.h"
 #include "stm8s_it.h"    // SDCC requires ISR declaration to be included here
 
@@ -35,23 +36,25 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #ifdef _RAISONANCE_
-#define PUTCHAR_PROTOTYPE int putchar (char c)
-#define GETCHAR_PROTOTYPE int getchar (void)
+  #define PUTCHAR_PROTOTYPE int putchar (char c)
+  #define GETCHAR_PROTOTYPE int getchar (void)
 #elif defined (_COSMIC_)
-#define PUTCHAR_PROTOTYPE char putchar (char c)
-#define GETCHAR_PROTOTYPE char getchar (void)
+  #define PUTCHAR_PROTOTYPE char putchar (char c)
+  #define GETCHAR_PROTOTYPE char getchar (void)
 #elif defined (_SDCC_)                    /* SDCC patch: same types as stdio.h */
- #if SDCC_VERSION >= 30600                  /* putchar() was changed for >=3.6.0, see sdcc manual */
-  #define PUTCHAR_PROTOTYPE int putchar (int c)
- #else
-  #define PUTCHAR_PROTOTYPE void putchar (char c)
- #endif 
- #define GETCHAR_PROTOTYPE int getchar (void)
+  #if SDCC_VERSION >= 30605               // declaration changed in sdcc 3.6.5 (officially with 3.7.0)
+    #define PUTCHAR_PROTOTYPE int putchar (int c)
+    #define GETCHAR_PROTOTYPE char getchar (void)
+  #else
+    #define PUTCHAR_PROTOTYPE void putchar (char c)
+    #define GETCHAR_PROTOTYPE unsigned char getchar (void)
+  #endif 
 #else /* _IAR_ */
-#define PUTCHAR_PROTOTYPE int putchar (int c)
-#define GETCHAR_PROTOTYPE int getchar (void)
+  #define PUTCHAR_PROTOTYPE int putchar (int c)
+  #define GETCHAR_PROTOTYPE int getchar (void)
 #endif /* _RAISONANCE_ */
 /* Private macro -------------------------------------------------------------*/
+
 
 /* Public variables ---------------------------------------------------------*/
 uint8_t     g_flag1ms=0;    // flag for 1ms interrupt (for TIM4 ISR)
@@ -74,9 +77,16 @@ void main(void)
   CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, ENABLE);
 
   /* Initialize LED pins in Output Mode */
-  GPIO_Init(GPIOA, (GPIO_Pin_TypeDef)(GPIO_PIN_2 | GPIO_PIN_3), GPIO_MODE_OUT_PP_LOW_FAST);
-  GPIO_WriteHigh(GPIOA, (GPIO_Pin_TypeDef)(GPIO_PIN_2 | GPIO_PIN_3));
-
+  #if (DEVICE==STM8S103)    // 1$ STM8 board, see https://www.cnx-software.com/2015/01/18/one-dollar-development-board/
+    GPIO_Init(GPIOD, (GPIO_Pin_TypeDef)GPIO_PIN_3, GPIO_MODE_OUT_PP_LOW_FAST);
+    GPIO_WriteHigh(GPIOD, (GPIO_Pin_TypeDef)GPIO_PIN_3);
+  #elif (DEVICE==STM8S208)  // muBoard, see https://frosch.piandmore.de//de/pam9/call/public-media/event_media/160611_Vortrag_Interpreter.pdf
+    GPIO_Init(GPIOH, (GPIO_Pin_TypeDef)(GPIO_PIN_2 | GPIO_PIN_3), GPIO_MODE_OUT_PP_LOW_FAST);
+    GPIO_WriteHigh(GPIOH, (GPIO_Pin_TypeDef)(GPIO_PIN_2 | GPIO_PIN_3));
+  #else
+    #error STM8 board not supported!
+  #endif
+  
   // config 1ms clock
   TIM4_DeInit();
   TIM4_TimeBaseInit(TIM4_PRESCALER_128, 124);
@@ -118,7 +128,13 @@ void main(void)
       if ((g_count1ms % 500) == 0)
       {
         // toogle LED
-        GPIO_WriteReverse(GPIOA, (GPIO_Pin_TypeDef)GPIO_PIN_2);
+        #if (DEVICE==STM8S103)
+          GPIO_WriteReverse(GPIOD, (GPIO_Pin_TypeDef)GPIO_PIN_3);
+        #elif (DEVICE==STM8S208)  // muBoard, see https://frosch.piandmore.de//de/pam9/call/public-media/event_media/160611_Vortrag_Interpreter.pdf
+          GPIO_WriteReverse(GPIOH, (GPIO_Pin_TypeDef)GPIO_PIN_2);
+        #else
+          #error STM8 board not supported!
+        #endif
         
         // print time
         printf("time %ld%c%c", g_count1ms,10,13);
@@ -173,7 +189,11 @@ PUTCHAR_PROTOTYPE
   UART1_SendData8(c);
   /* Loop until the end of transmission */
   while (UART1_GetFlagStatus(UART1_FLAG_TXE) == RESET);
-  return (c);
+
+  // non SDCC or newer SDCC version
+  #if !defined(__SDCC) || (SDCC_VERSION >= 30605)
+    return (c);
+  #endif
 }
 
 
@@ -207,6 +227,10 @@ GETCHAR_PROTOTYPE
   */
 void assert_failed(uint8_t* file, uint32_t line)
 { 
+  // avoid compiler warnings
+  (void) file;
+  (void) line;
+  
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
