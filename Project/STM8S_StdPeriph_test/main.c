@@ -77,10 +77,10 @@ void main(void)
   CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, ENABLE);
 
   /* Initialize LED pins in Output Mode */
-  #if (DEVICE==STM8S103)    // 1$ STM8 board, see https://www.cnx-software.com/2015/01/18/one-dollar-development-board/
+  #if defined(STM8S103)    // 1$ STM8 board, see https://www.cnx-software.com/2015/01/18/one-dollar-development-board/
     GPIO_Init(GPIOD, (GPIO_Pin_TypeDef)GPIO_PIN_3, GPIO_MODE_OUT_PP_LOW_FAST);
     GPIO_WriteHigh(GPIOD, (GPIO_Pin_TypeDef)GPIO_PIN_3);
-  #elif (DEVICE==STM8S208)  // muBoard, see https://frosch.piandmore.de//de/pam9/call/public-media/event_media/160611_Vortrag_Interpreter.pdf
+  #elif defined(STM8S208)  // muBoard, see https://frosch.piandmore.de//de/pam9/call/public-media/event_media/160611_Vortrag_Interpreter.pdf
     GPIO_Init(GPIOH, (GPIO_Pin_TypeDef)(GPIO_PIN_2 | GPIO_PIN_3), GPIO_MODE_OUT_PP_LOW_FAST);
     GPIO_WriteHigh(GPIOH, (GPIO_Pin_TypeDef)(GPIO_PIN_2 | GPIO_PIN_3));
   #else
@@ -128,9 +128,9 @@ void main(void)
       if ((g_count1ms % 500) == 0)
       {
         // toogle LED
-        #if (DEVICE==STM8S103)
+        #if defined(STM8S103)
           GPIO_WriteReverse(GPIOD, (GPIO_Pin_TypeDef)GPIO_PIN_3);
-        #elif (DEVICE==STM8S208)  // muBoard, see https://frosch.piandmore.de//de/pam9/call/public-media/event_media/160611_Vortrag_Interpreter.pdf
+        #elif defined(STM8S208)  // muBoard, see https://frosch.piandmore.de//de/pam9/call/public-media/event_media/160611_Vortrag_Interpreter.pdf
           GPIO_WriteReverse(GPIOH, (GPIO_Pin_TypeDef)GPIO_PIN_2);
         #else
           #error STM8 board not supported!
