@@ -42,9 +42,9 @@
   #define PUTCHAR_PROTOTYPE char putchar (char c)
   #define GETCHAR_PROTOTYPE char getchar (void)
 #elif defined (_SDCC_)                    /* SDCC patch: same types as stdio.h */
-  #if SDCC_VERSION >= 30605               // declaration changed in sdcc 3.6.5 (officially with 3.7.0)
+  #if SDCC_VERSION >= 30700               // declaration changed in sdcc 3.7.0 (see sdccman.pdf)
     #define PUTCHAR_PROTOTYPE int putchar (int c)
-    #define GETCHAR_PROTOTYPE char getchar (void)
+    #define GETCHAR_PROTOTYPE int getchar (void)
   #else
     #define PUTCHAR_PROTOTYPE void putchar (char c)
     #define GETCHAR_PROTOTYPE unsigned char getchar (void)
