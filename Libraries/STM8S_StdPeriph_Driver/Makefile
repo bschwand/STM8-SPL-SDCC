@@ -22,7 +22,7 @@ endif
 CC_ROOT =
 CC      = sdcc
 CFLAGS  = -mstm8 -lstm8 --opt-code-size
-AR      = sdar
+AR      = sdcclib
 
 # set output folder and target name
 OUTPUT_DIR = ./$(DEVICE)
@@ -81,7 +81,7 @@ $(OUTPUT_DIR)/%.rel: %.c
 	$(CC) $(CFLAGS) $(INCLUDE) -D$(DEVICE) -c $? -o $@
 
 $(TARGET): $(PRJ_OBJECTS) $(SPL_OBJECTS) $(EVAL_OBJECTS) $(EVAL_COMM_OBJECTS) $(EVAL_STM8S_128K_OBJECTS)
-	$(AR) -rc $(TARGET) $^
+	$(AR) -a $(TARGET) $^
 
 clean: 
 	rm -fr $(OUTPUT_DIR)

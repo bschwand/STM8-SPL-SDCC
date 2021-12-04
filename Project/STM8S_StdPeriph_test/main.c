@@ -37,21 +37,21 @@
 /* Private define ------------------------------------------------------------*/
 #ifdef _RAISONANCE_
   #define PUTCHAR_PROTOTYPE int putchar (char c)
-  #define GETCHAR_PROTOTYPE int getUart (void)
+  #define GETCHAR_PROTOTYPE int getchar (void)
 #elif defined (_COSMIC_)
   #define PUTCHAR_PROTOTYPE char putchar (char c)
-  #define GETCHAR_PROTOTYPE char getUart (void)
+  #define GETCHAR_PROTOTYPE char getchar (void)
 #elif defined (_SDCC_)                    /* SDCC patch: same types as stdio.h */
   #if SDCC_VERSION >= 30605               // declaration changed in sdcc 3.6.5 (officially with 3.7.0)
     #define PUTCHAR_PROTOTYPE int putchar (int c)
-    #define GETCHAR_PROTOTYPE char getUart (void)
+    #define GETCHAR_PROTOTYPE char getchar (void)
   #else
     #define PUTCHAR_PROTOTYPE void putchar (char c)
-    #define GETCHAR_PROTOTYPE unsigned char getUart (void)
+    #define GETCHAR_PROTOTYPE unsigned char getchar (void)
   #endif 
 #else /* _IAR_ */
   #define PUTCHAR_PROTOTYPE int putchar (int c)
-  #define GETCHAR_PROTOTYPE int getUart (void)
+  #define GETCHAR_PROTOTYPE int getchar (void)
 #endif /* _RAISONANCE_ */
 /* Private macro -------------------------------------------------------------*/
 
@@ -114,7 +114,7 @@ void main(void)
     // if key pressed, send echo and store to flash
     if (UART1_GetFlagStatus(UART1_FLAG_RXNE))
     {
-      val = getUart();
+      val = getchar();
       printf("read %c%c%c", val,10,13);
       
       //FLASH_ProgramByte(addr, val);
